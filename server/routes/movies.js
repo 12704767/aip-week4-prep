@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
       synopsis: req.body.synopsis,
       genre: req.body.genre
     })
-    .then((movies) => res.json(movies));
+    .then((movies) => res.json(movies))
 });
 
 /* GET the movie with :id. */

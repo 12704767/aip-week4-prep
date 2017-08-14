@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     duration: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: false
     },
     synopsis: {
       type: DataTypes.TEXT('long')
@@ -22,7 +22,23 @@ module.exports = (sequelize, DataTypes) => {
         return this.getDataValue('genre').split(',');
       },
       set: function (genres) {
+        console.log(genres);
         this.setDataValue('genre', genres.join(','))
+      }
+    }
+  }, {
+    validate: {
+      uniqueGenres() {
+        console.log(this.genre);
+        for (i in this.genre) {
+          var genreName = this.genre[i].toLowerCase();
+          var sameGenres = this.genre.filter((g) => {
+            return g.toLowerCase() === genreName;
+          });
+          if (sameGenres.length > 1) {
+            throw new Error("You cannot have duplicate genres");
+          }
+        }
       }
     }
   });

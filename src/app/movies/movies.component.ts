@@ -33,6 +33,9 @@ export class MoviesComponent implements OnInit {
   }
 
   saveMovie(movie) {
+    if (!Array.isArray(movie.genre)) {
+      movie.genre = movie.genre.split(',');
+    };
     this.moviesService.saveMovie(movie).subscribe(movies => {
       this.editing = false;
       this.editingMovie = null;
