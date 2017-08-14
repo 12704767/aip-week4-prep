@@ -11,7 +11,13 @@ module.exports = (sequelize, DataTypes) => {
     },
     duration: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        min: {
+          args: [0],
+          msg: "Duration cannot be less than 0 minutes. That's impossible."
+        }
+      }
     },
     synopsis: {
       type: DataTypes.TEXT('long')
